@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BookAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookAPI.Repositories
 {
@@ -13,9 +14,9 @@ namespace BookAPI.Repositories
             _context = context;
         }
 
-        public Task<IEnumerable<Book>> Get()
+        public async Task<IEnumerable<Book>> Get()
         {
-            throw new System.NotImplementedException();
+            return await _context.Books.ToListAsync();
         }
 
         public Task<Book> Get(int id)
