@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookAPI.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookAPI.Controllers
 {
@@ -6,6 +7,13 @@ namespace BookAPI.Controllers
     [ApiController]
     public class BooksController : Controller
     {
+        private readonly IBookRepository _bookRepository;
+
+        public BooksController(IBookRepository bookRepository)
+        {
+            _bookRepository = bookRepository;
+        }
+
         // GET
         public IActionResult Index()
         {
