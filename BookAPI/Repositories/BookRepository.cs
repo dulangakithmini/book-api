@@ -19,9 +19,9 @@ namespace BookAPI.Repositories
             return await _context.Books.ToListAsync();
         }
 
-        public Task<Book> Get(int id)
+        public async Task<Book> Get(int id)
         {
-            throw new System.NotImplementedException();
+            return await _context.Books.FindAsync();
         }
 
         public async Task<Book> Create(Book book)
