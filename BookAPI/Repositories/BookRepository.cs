@@ -32,9 +32,10 @@ namespace BookAPI.Repositories
             return book;
         }
 
-        public Task Update(Book book)
+        public async Task Update(Book book)
         {
-            throw new System.NotImplementedException();
+            _context.Entry(book).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
 
         public async Task Delete(int id)
