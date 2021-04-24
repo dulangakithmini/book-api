@@ -31,14 +31,16 @@ namespace BookAPI.Repositories
             return book;
         }
 
-        public Task<Book> Update(Book book)
+        public Task Update(Book book)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<Book> Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var bookToDelete = await _context.Books.FindAsync(id);
+            _context.Books.Remove(bookToDelete);
+            await _context.SaveChangesAsync();
         }
     }
 }
