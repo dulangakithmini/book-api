@@ -40,6 +40,19 @@ namespace BookAPI.Controllers
             return CreatedAtAction(nameof(GetBooks), new {id = newBook.Id}, newBook);
         }
 
+        [HttpPut]
+        public async Task<ActionResult<Book>> PutBooks(int id, [FromBody] Book book)
+        {
+            if (id != book.Id)
+            {
+                return BadRequest();
+            }
+
+            await _bookRepository.Update(book);
+            // Generate 201 http status code to indicate that the request has been processed but there's no data.
+            return NoContent();
+        }
+
         // GET
         // public IActionResult Index()
         // {
