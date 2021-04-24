@@ -23,9 +23,12 @@ namespace BookAPI.Repositories
             throw new System.NotImplementedException();
         }
 
-        public Task<Book> Create(Book book)
+        public async Task<Book> Create(Book book)
         {
-            throw new System.NotImplementedException();
+            _context.Books.Add(book);
+            await _context.SaveChangesAsync();
+
+            return book;
         }
 
         public Task<Book> Update(Book book)
