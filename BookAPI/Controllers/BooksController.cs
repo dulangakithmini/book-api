@@ -17,10 +17,18 @@ namespace BookAPI.Controllers
             _bookRepository = bookRepository;
         }
 
+        // When this method is invoked, asp.net concerts book object to json before returning it.
         [HttpGet]
         public async Task<IEnumerable<Book>> GetBooks()
         {
             return await _bookRepository.Get();
+        }
+
+        // ActionResult provides the flexibility to return other types such as not found or bad request.
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Book>> GetBooks(int id)
+        {
+            return await _bookRepository.Get(id);
         }
 
         // GET
