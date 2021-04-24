@@ -1,4 +1,7 @@
-﻿using BookAPI.Repositories;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BookAPI.Models;
+using BookAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookAPI.Controllers
@@ -12,6 +15,12 @@ namespace BookAPI.Controllers
         public BooksController(IBookRepository bookRepository)
         {
             _bookRepository = bookRepository;
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<Book>> GetBooks()
+        {
+            return await _bookRepository.Get();
         }
 
         // GET
