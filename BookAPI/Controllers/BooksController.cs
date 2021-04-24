@@ -41,7 +41,7 @@ namespace BookAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<Book>> PutBooks(int id, [FromBody] Book book)
+        public async Task<ActionResult> PutBooks(int id, [FromBody] Book book)
         {
             if (id != book.Id)
             {
@@ -53,10 +53,18 @@ namespace BookAPI.Controllers
             return NoContent();
         }
 
-        // GET
-        // public IActionResult Index()
-        // {
-        //     return View();
-        // }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteBooks(int id)
+        {
+            var bookToDelete = _bookRepository.Get(id);
+
+            if (bookToDelete == null)
+            {
+                return NotFound();
+            }
+
+            await _bookRepository.Delete(bookToDelete.Id);
+            return NoContent();
+        }
     }
 }
